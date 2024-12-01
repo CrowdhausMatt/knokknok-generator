@@ -33,14 +33,22 @@
 
         .logo-container {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+        }
+
+        .logo-container a {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .logo-container a:hover {
+            transform: scale(1.02);
+            cursor: pointer;
         }
 
         .logo {
             max-width: 350px;
             height: auto;
-            margin: 0 auto;
-            display: block;
         }
 
         .tagline {
@@ -99,7 +107,7 @@
         }
 
         .alert-success {
-            background-color: #FFD700;  /* Gold color */
+            background-color: #FFD700;
             color: black;
             border: none;
             border-radius: 15px;
@@ -111,43 +119,15 @@
             border: none;
             border-radius: 15px;
         }
-
-        .loading {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        
-        .btn-loading {
-            position: relative;
-        }
-        
-        .btn-loading::after {
-            content: '';
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            border: 2px solid #000;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-            position: absolute;
-            right: 1em;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        @keyframes spin {
-            to {
-                transform: translateY(-50%) rotate(360deg);
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="form-container">
             <div class="logo-container">
-                <img src="{{ url_for('static', filename='KnokKnokLogo.png') }}" alt="KnokKnok Logo" class="logo">
+                <a href="https://knokknok.social/">
+                    <img src="{{ url_for('static', filename='KnokKnokLogo.png') }}" alt="KnokKnok Logo" class="logo">
+                </a>
             </div>
             
             <div class="tagline">Who's There?</div>
@@ -163,15 +143,13 @@
                             </div>
                             {% if category == 'success' %}
                                 <script>
-                                    // Trigger confetti animation
                                     confetti({
                                         particleCount: 100,
                                         spread: 70,
                                         origin: { y: 0.6 },
-                                        colors: ['#FFD700', '#ffffff', '#000000'] // Gold, white, and black colors
+                                        colors: ['#FFD700', '#ffffff', '#000000']
                                     });
 
-                                    // Add a second burst after a small delay
                                     setTimeout(() => {
                                         confetti({
                                             particleCount: 50,
@@ -210,15 +188,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        // Add loading state to form when submitted
-        document.querySelector('form').addEventListener('submit', function(e) {
-            this.classList.add('loading');
-            const button = this.querySelector('button[type="submit"]');
-            button.classList.add('btn-loading');
-            button.innerHTML = 'Generating...';
-        });
-    </script>
 </body>
-</html> 
+</html>
