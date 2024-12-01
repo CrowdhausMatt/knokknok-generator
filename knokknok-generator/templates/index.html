@@ -20,11 +20,23 @@
             padding: 20px;
             font-family: 'Norwester', sans-serif;
             color: white;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 40px;
         }
 
         .form-container {
+            flex: 1;
             max-width: 600px;
-            margin: 50px auto;
             padding: 30px;
             background-color: #000000;
             border-radius: 25px;
@@ -119,10 +131,58 @@
             border: none;
             border-radius: 15px;
         }
+
+        .iphone-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 375px;
+        }
+
+        .iphone-frame {
+            position: relative;
+            width: 300px;
+            height: 600px;
+            background: #1a1a1a;
+            border-radius: 50px;
+            border: 8px solid #333;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .iphone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #333;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 2;
+        }
+
+        .iphone-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .iphone-container {
+                margin-top: 50px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="main-container">
         <div class="form-container">
             <div class="logo-container">
                 <a href="https://knokknok.social/">
@@ -186,6 +246,15 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Generate Video</button>
             </form>
+        </div>
+
+        <div class="iphone-container">
+            <div class="iphone-frame">
+                <div class="iphone-notch"></div>
+                <video class="iphone-video" autoplay loop muted playsinline>
+                    <source src="{{ url_for('static', filename='demo.mp4') }}" type="video/mp4">
+                </video>
+            </div>
         </div>
     </div>
 </body>
